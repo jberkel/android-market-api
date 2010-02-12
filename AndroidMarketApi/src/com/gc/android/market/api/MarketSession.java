@@ -159,16 +159,18 @@ public class MarketSession {
 	
 	@SuppressWarnings("unchecked")
 	public void flush() {
-		request.setContext(context);
+		RequestContext ctxt = context.build();
+		context = RequestContext.newBuilder(ctxt);
+		request.setContext(ctxt);
 		Response resp = executeProtobuf(request.build());
 		int i = 0;
 		for(ResponseGroup grp : resp.getResponseGroupList()) {
 			Object val = null;
-			if(grp.getAppsResponse().isInitialized())
+			if(grp.hasAppsResponse())
 				val = grp.getAppsResponse();
-			if(grp.getCategoriesResponse().isInitialized())
+			if(grp.hasCategoriesResponse())
 				val = grp.getCategoriesResponse();
-			if(grp.getCommentsResponse().isInitialized())
+			if(grp.hasCommentsResponse())
 					val = grp.getCommentsResponse();
 			((Callback)callbacks.get(i)).onResult(grp.getContext(), val);
 			i++;
@@ -178,12 +180,14 @@ public class MarketSession {
 	}
 	
 	public ResponseGroup execute(RequestGroup requestGroup) {
-		Response resp = executeProtobuf(request.addRequestGroup(requestGroup).setContext(context).build());
+		RequestContext ctxt = context.build();
+		context = RequestContext.newBuilder(ctxt);
+		request.setContext(ctxt);
+		Response resp = executeProtobuf(request.addRequestGroup(requestGroup).setContext(ctxt).build());
 		return resp.getResponseGroup(0);
 	}
 	
 	private Response executeProtobuf(Request request) {
-		System.out.println(request);
 		byte[] requestBytes = request.toByteArray();
 		byte[] responseBytes = executeRawHttpQuery(requestBytes);
 		try {

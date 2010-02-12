@@ -16,7 +16,8 @@ public class Main {
 						"market email password query");
 				return;
 			}
-			
+		
+
 			String login = args[0];
 			String password = args[1];
 			String query = args.length > 2 ? args[2] : "Test";
@@ -28,27 +29,27 @@ public class Main {
 	
 			AppsRequest appsRequest = AppsRequest.newBuilder()
 				.setQuery(query)
-				.setStartIndex(2).setEntriesCount(100)
+				.setStartIndex(2).setEntriesCount(10)
 				.setWithExtendedInfo(true)
 				.build();
 			
-			/*
 			CommentsRequest commentsRequest = CommentsRequest.newBuilder()
 				.setAppId("7065399193137006744")
 				.setStartIndex(0)
 				.setEntriesCount(10)
 				.build();
-			*/
+
 			MarketSession.Callback callback = new MarketSession.Callback() {
 
 				@Override
 				public void onResult(ResponseContext context, Object response) {
-					System.out.println(response);
+					System.out.println("Response : " + response);
 				}
 				
 			};
 			session.append(appsRequest, callback);
-			//session.append(commentsRequest, callback);
+			session.flush();
+			session.append(commentsRequest, callback);
 			session.flush();
 		} catch(Exception ex) {
 			ex.printStackTrace();
