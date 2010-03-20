@@ -100,7 +100,7 @@ message Comment {
 	optional string text = 1;
 	optional int32 rating = 2;
 	optional string authorName = 3;
-	optional int32 creationTime = 4;
+	optional uint64 creationTime = 4;
 	optional string authorId = 5;
 }
 
@@ -137,11 +137,29 @@ message RequestContext {
 	optional string simOperatorNumeric = 11; // sim.gsm.operator.numeric
 }
 
+message GetImageRequest {
+	optional string appId = 1;
+	enum AppImageUsage {
+		ICON = 0;
+		SCREENSHOT = 1;
+		SCREENSHOT_THUMBNAIL = 2;
+		PROMO_BADGE = 3;
+		BILING_ICON = 4;
+	}
+	optional AppImageUsage imageUsage = 3; 
+	optional string imageId = 4; // 0 or 1
+}
+
+message GetImageResponse {
+	optional bytes imageData = 1;
+}
+
 message Request {
 	optional RequestContext context = 1;
 	repeated group RequestGroup = 2 {
 		optional AppsRequest appsRequest = 4;
 		optional CommentsRequest commentsRequest = 5;
+		optional GetImageRequest imageRequest = 11;
 		optional SubCategoriesRequest subCategoriesRequest = 14;
 		optional CategoriesRequest categoriesRequest = 21;
 	}
@@ -159,6 +177,7 @@ message Response {
 		optional ResponseContext context = 2;
 		optional AppsResponse appsResponse = 3;
 		optional CommentsResponse commentsResponse = 4;
+		optional GetImageResponse imageResponse = 10;
 		optional CategoriesResponse categoriesResponse = 20;
 		optional SubCategoriesResponse subCategoriesResponse = 13;
 	}

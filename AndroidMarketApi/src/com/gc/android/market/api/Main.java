@@ -1,8 +1,14 @@
 package com.gc.android.market.api;
 
+import java.io.FileOutputStream;
+
+import com.gc.android.market.api.MarketSession.Callback;
 import com.gc.android.market.api.model.Market.AppsRequest;
 import com.gc.android.market.api.model.Market.CommentsRequest;
+import com.gc.android.market.api.model.Market.GetImageRequest;
+import com.gc.android.market.api.model.Market.GetImageResponse;
 import com.gc.android.market.api.model.Market.ResponseContext;
+import com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage;
 
 public class Main {
 
@@ -38,7 +44,14 @@ public class Main {
 				.setStartIndex(0)
 				.setEntriesCount(10)
 				.build();
+			
+			//
 
+			GetImageRequest imgReq = GetImageRequest.newBuilder().setAppId("-7934792861962808905")
+				.setImageUsage(AppImageUsage.SCREENSHOT)
+				.setImageId("1")
+				.build();
+			
 			MarketSession.Callback callback = new MarketSession.Callback() {
 
 				@Override
@@ -48,6 +61,20 @@ public class Main {
 				
 			};
 			session.append(appsRequest, callback);
+			session.flush();
+			session.append(imgReq, new Callback<GetImageResponse>() {
+				
+				@Override
+				public void onResult(ResponseContext context, GetImageResponse response) {
+					try {
+						FileOutputStream fos = new FileOutputStream("icon.png");
+						fos.write(response.getImageData().toByteArray());
+						fos.close();
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
 			session.flush();
 			session.append(commentsRequest, callback);
 			session.flush();

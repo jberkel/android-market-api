@@ -20,6 +20,8 @@ import com.gc.android.market.api.model.Market.CategoriesRequest;
 import com.gc.android.market.api.model.Market.CategoriesResponse;
 import com.gc.android.market.api.model.Market.CommentsRequest;
 import com.gc.android.market.api.model.Market.CommentsResponse;
+import com.gc.android.market.api.model.Market.GetImageRequest;
+import com.gc.android.market.api.model.Market.GetImageResponse;
 import com.gc.android.market.api.model.Market.Request;
 import com.gc.android.market.api.model.Market.RequestContext;
 import com.gc.android.market.api.model.Market.Response;
@@ -53,22 +55,30 @@ public class MarketSession {
 	public static final int PROTOCOL_VERSION = 2;
 	Request.Builder request = Request.newBuilder();
 	RequestContext.Builder context = RequestContext.newBuilder();
+	public RequestContext.Builder getContext() {
+		return context;
+	}
+
 	List<Callback<?>> callbacks = new Vector<Callback<?>>(); 
 	String authSubToken = null;
 	
+	public String getAuthSubToken() {
+		return authSubToken;
+	}
+
 	public MarketSession() {
 		context.setUnknown1(0);
 		context.setVersion(1002);
 		context.setAndroidId("0000000000000000");
 		//context.setAndroidId( hexadecimal(0123132123123113213).toLowerCase());
 		setLocale(Locale.getDefault());
-		context.setDeviceAndSdkVersion("sapphire:3");
+		context.setDeviceAndSdkVersion("sapphire:7");
 		setOperatorTMobile();
 	}
 	
 	public void setLocale(Locale locale) {
 		context.setUserLanguage(locale.getLanguage().toLowerCase());
-		context.setUserCountry(locale.getCountry().toUpperCase());
+		context.setUserCountry(locale.getCountry().toLowerCase());
 	}
 	
 	public void setOperator(String alpha, String numeric) {
@@ -147,6 +157,11 @@ public class MarketSession {
 		callbacks.add(responseCallback);
 	}
 	
+	public void append(GetImageRequest requestGroup, Callback<GetImageResponse> responseCallback) {
+		request.addRequestGroup(RequestGroup.newBuilder().setImageRequest(requestGroup));
+		callbacks.add(responseCallback);
+	}
+	
 	public void append(CommentsRequest requestGroup, Callback<CommentsResponse> responseCallback) {
 		request.addRequestGroup(RequestGroup.newBuilder().setCommentsRequest(requestGroup));
 		callbacks.add(responseCallback);
@@ -171,8 +186,10 @@ public class MarketSession {
 			if(grp.hasCategoriesResponse())
 				val = grp.getCategoriesResponse();
 			if(grp.hasCommentsResponse())
-					val = grp.getCommentsResponse();
-			((Callback)callbacks.get(i)).onResult(grp.getContext(), val);
+				val = grp.getCommentsResponse();
+			if(grp.hasImageResponse())
+				val = grp.getImageResponse();
+		((Callback)callbacks.get(i)).onResult(grp.getContext(), val);
 			i++;
 		}
 		request = Request.newBuilder();
@@ -207,6 +224,7 @@ public class MarketSession {
 			cnx.setRequestProperty("Cookie","ANDROID="+authSubToken);
 			cnx.setRequestProperty("User-Agent", "Android-Market/2 (sapphire PLAT-RC33); gzip");
 			cnx.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			cnx.setRequestProperty("Accept-Charset","ISO-8859-1,utf-8;q=0.7,*;q=0.7");
 			
 			String request64 = Base64.encodeBytes(request);
 			
@@ -218,14 +236,20 @@ public class MarketSession {
 			os.write(requestData.getBytes());
 			os.close();
 			
+			if(cnx.getResponseCode() >= 400) {
+				throw new RuntimeException("Response code = " + cnx.getResponseCode() + 
+						", msg = " + cnx.getResponseMessage());
+			}
+			
 			InputStream is = cnx.getInputStream();
 			GZIPInputStream gzIs = new GZIPInputStream(is);
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			byte[] buff = new byte[1024];
 			while(true) {
-				int val = gzIs.read();
-				if(val < 0)
+				int nb = gzIs.read(buff);
+				if(nb < 0)
 					break;
-				bos.write(val);
+				bos.write(buff,0,nb);
 			}
 			is.close();
 			cnx.disconnect();

@@ -4000,12 +4000,12 @@ public final class Market {
     public boolean hasAuthorName() { return hasAuthorName; }
     public java.lang.String getAuthorName() { return authorName_; }
     
-    // optional int32 creationTime = 4;
+    // optional uint64 creationTime = 4;
     public static final int CREATIONTIME_FIELD_NUMBER = 4;
     private boolean hasCreationTime;
-    private int creationTime_ = 0;
+    private long creationTime_ = 0L;
     public boolean hasCreationTime() { return hasCreationTime; }
-    public int getCreationTime() { return creationTime_; }
+    public long getCreationTime() { return creationTime_; }
     
     // optional string authorId = 5;
     public static final int AUTHORID_FIELD_NUMBER = 5;
@@ -4030,7 +4030,7 @@ public final class Market {
         output.writeString(3, getAuthorName());
       }
       if (hasCreationTime()) {
-        output.writeInt32(4, getCreationTime());
+        output.writeUInt64(4, getCreationTime());
       }
       if (hasAuthorId()) {
         output.writeString(5, getAuthorId());
@@ -4058,7 +4058,7 @@ public final class Market {
       }
       if (hasCreationTime()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getCreationTime());
+          .computeUInt64Size(4, getCreationTime());
       }
       if (hasAuthorId()) {
         size += com.google.protobuf.CodedOutputStream
@@ -4266,7 +4266,7 @@ public final class Market {
               break;
             }
             case 32: {
-              setCreationTime(input.readInt32());
+              setCreationTime(input.readUInt64());
               break;
             }
             case 42: {
@@ -4338,21 +4338,21 @@ public final class Market {
         return this;
       }
       
-      // optional int32 creationTime = 4;
+      // optional uint64 creationTime = 4;
       public boolean hasCreationTime() {
         return result.hasCreationTime();
       }
-      public int getCreationTime() {
+      public long getCreationTime() {
         return result.getCreationTime();
       }
-      public Builder setCreationTime(int value) {
+      public Builder setCreationTime(long value) {
         result.hasCreationTime = true;
         result.creationTime_ = value;
         return this;
       }
       public Builder clearCreationTime() {
         result.hasCreationTime = false;
-        result.creationTime_ = 0;
+        result.creationTime_ = 0L;
         return this;
       }
       
@@ -6288,6 +6288,707 @@ public final class Market {
     }
   }
   
+  public static final class GetImageRequest extends
+      com.google.protobuf.GeneratedMessage {
+    // Use GetImageRequest.newBuilder() to construct.
+    private GetImageRequest() {}
+    
+    private static final GetImageRequest defaultInstance = new GetImageRequest();
+    public static GetImageRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public GetImageRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.gc.android.market.api.model.Market.internal_static_GetImageRequest_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.gc.android.market.api.model.Market.internal_static_GetImageRequest_fieldAccessorTable;
+    }
+    
+    public enum AppImageUsage
+        implements com.google.protobuf.ProtocolMessageEnum {
+      ICON(0, 0),
+      SCREENSHOT(1, 1),
+      SCREENSHOT_THUMBNAIL(2, 2),
+      PROMO_BADGE(3, 3),
+      BILING_ICON(4, 4),
+      ;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static AppImageUsage valueOf(int value) {
+        switch (value) {
+          case 0: return ICON;
+          case 1: return SCREENSHOT;
+          case 2: return SCREENSHOT_THUMBNAIL;
+          case 3: return PROMO_BADGE;
+          case 4: return BILING_ICON;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<AppImageUsage>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<AppImageUsage>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<AppImageUsage>() {
+              public AppImageUsage findValueByNumber(int number) {
+                return AppImageUsage.valueOf(number)
+      ;        }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.gc.android.market.api.model.Market.GetImageRequest.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final AppImageUsage[] VALUES = {
+        ICON, SCREENSHOT, SCREENSHOT_THUMBNAIL, PROMO_BADGE, BILING_ICON, 
+      };
+      public static AppImageUsage valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      private final int index;
+      private final int value;
+      private AppImageUsage(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      static {
+        com.gc.android.market.api.model.Market.getDescriptor();
+      }
+    }
+    
+    // optional string appId = 1;
+    public static final int APPID_FIELD_NUMBER = 1;
+    private boolean hasAppId;
+    private java.lang.String appId_ = "";
+    public boolean hasAppId() { return hasAppId; }
+    public java.lang.String getAppId() { return appId_; }
+    
+    // optional .GetImageRequest.AppImageUsage imageUsage = 3;
+    public static final int IMAGEUSAGE_FIELD_NUMBER = 3;
+    private boolean hasImageUsage;
+    private com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage imageUsage_ = com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage.ICON;
+    public boolean hasImageUsage() { return hasImageUsage; }
+    public com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage getImageUsage() { return imageUsage_; }
+    
+    // optional string imageId = 4;
+    public static final int IMAGEID_FIELD_NUMBER = 4;
+    private boolean hasImageId;
+    private java.lang.String imageId_ = "";
+    public boolean hasImageId() { return hasImageId; }
+    public java.lang.String getImageId() { return imageId_; }
+    
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasAppId()) {
+        output.writeString(1, getAppId());
+      }
+      if (hasImageUsage()) {
+        output.writeEnum(3, getImageUsage().getNumber());
+      }
+      if (hasImageId()) {
+        output.writeString(4, getImageId());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasAppId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getAppId());
+      }
+      if (hasImageUsage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, getImageUsage().getNumber());
+      }
+      if (hasImageId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(4, getImageId());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.gc.android.market.api.model.Market.GetImageRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private com.gc.android.market.api.model.Market.GetImageRequest result;
+      
+      // Construct using com.gc.android.market.api.model.Market.GetImageRequest.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new com.gc.android.market.api.model.Market.GetImageRequest();
+        return builder;
+      }
+      
+      protected com.gc.android.market.api.model.Market.GetImageRequest internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new com.gc.android.market.api.model.Market.GetImageRequest();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.gc.android.market.api.model.Market.GetImageRequest.getDescriptor();
+      }
+      
+      public com.gc.android.market.api.model.Market.GetImageRequest getDefaultInstanceForType() {
+        return com.gc.android.market.api.model.Market.GetImageRequest.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public com.gc.android.market.api.model.Market.GetImageRequest build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private com.gc.android.market.api.model.Market.GetImageRequest buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public com.gc.android.market.api.model.Market.GetImageRequest buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        com.gc.android.market.api.model.Market.GetImageRequest returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.gc.android.market.api.model.Market.GetImageRequest) {
+          return mergeFrom((com.gc.android.market.api.model.Market.GetImageRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.gc.android.market.api.model.Market.GetImageRequest other) {
+        if (other == com.gc.android.market.api.model.Market.GetImageRequest.getDefaultInstance()) return this;
+        if (other.hasAppId()) {
+          setAppId(other.getAppId());
+        }
+        if (other.hasImageUsage()) {
+          setImageUsage(other.getImageUsage());
+        }
+        if (other.hasImageId()) {
+          setImageId(other.getImageId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setAppId(input.readString());
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage value = com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                setImageUsage(value);
+              }
+              break;
+            }
+            case 34: {
+              setImageId(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // optional string appId = 1;
+      public boolean hasAppId() {
+        return result.hasAppId();
+      }
+      public java.lang.String getAppId() {
+        return result.getAppId();
+      }
+      public Builder setAppId(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasAppId = true;
+        result.appId_ = value;
+        return this;
+      }
+      public Builder clearAppId() {
+        result.hasAppId = false;
+        result.appId_ = getDefaultInstance().getAppId();
+        return this;
+      }
+      
+      // optional .GetImageRequest.AppImageUsage imageUsage = 3;
+      public boolean hasImageUsage() {
+        return result.hasImageUsage();
+      }
+      public com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage getImageUsage() {
+        return result.getImageUsage();
+      }
+      public Builder setImageUsage(com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasImageUsage = true;
+        result.imageUsage_ = value;
+        return this;
+      }
+      public Builder clearImageUsage() {
+        result.hasImageUsage = false;
+        result.imageUsage_ = com.gc.android.market.api.model.Market.GetImageRequest.AppImageUsage.ICON;
+        return this;
+      }
+      
+      // optional string imageId = 4;
+      public boolean hasImageId() {
+        return result.hasImageId();
+      }
+      public java.lang.String getImageId() {
+        return result.getImageId();
+      }
+      public Builder setImageId(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasImageId = true;
+        result.imageId_ = value;
+        return this;
+      }
+      public Builder clearImageId() {
+        result.hasImageId = false;
+        result.imageId_ = getDefaultInstance().getImageId();
+        return this;
+      }
+    }
+    
+    static {
+      com.gc.android.market.api.model.Market.getDescriptor();
+    }
+    
+    static {
+      com.gc.android.market.api.model.Market.internalForceInit();
+    }
+  }
+  
+  public static final class GetImageResponse extends
+      com.google.protobuf.GeneratedMessage {
+    // Use GetImageResponse.newBuilder() to construct.
+    private GetImageResponse() {}
+    
+    private static final GetImageResponse defaultInstance = new GetImageResponse();
+    public static GetImageResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public GetImageResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.gc.android.market.api.model.Market.internal_static_GetImageResponse_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.gc.android.market.api.model.Market.internal_static_GetImageResponse_fieldAccessorTable;
+    }
+    
+    // optional bytes imageData = 1;
+    public static final int IMAGEDATA_FIELD_NUMBER = 1;
+    private boolean hasImageData;
+    private com.google.protobuf.ByteString imageData_ = com.google.protobuf.ByteString.EMPTY;
+    public boolean hasImageData() { return hasImageData; }
+    public com.google.protobuf.ByteString getImageData() { return imageData_; }
+    
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (hasImageData()) {
+        output.writeBytes(1, getImageData());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasImageData()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getImageData());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeDelimitedFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.gc.android.market.api.model.Market.GetImageResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.gc.android.market.api.model.Market.GetImageResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private com.gc.android.market.api.model.Market.GetImageResponse result;
+      
+      // Construct using com.gc.android.market.api.model.Market.GetImageResponse.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new com.gc.android.market.api.model.Market.GetImageResponse();
+        return builder;
+      }
+      
+      protected com.gc.android.market.api.model.Market.GetImageResponse internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new com.gc.android.market.api.model.Market.GetImageResponse();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.gc.android.market.api.model.Market.GetImageResponse.getDescriptor();
+      }
+      
+      public com.gc.android.market.api.model.Market.GetImageResponse getDefaultInstanceForType() {
+        return com.gc.android.market.api.model.Market.GetImageResponse.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public com.gc.android.market.api.model.Market.GetImageResponse build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private com.gc.android.market.api.model.Market.GetImageResponse buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public com.gc.android.market.api.model.Market.GetImageResponse buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        com.gc.android.market.api.model.Market.GetImageResponse returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.gc.android.market.api.model.Market.GetImageResponse) {
+          return mergeFrom((com.gc.android.market.api.model.Market.GetImageResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.gc.android.market.api.model.Market.GetImageResponse other) {
+        if (other == com.gc.android.market.api.model.Market.GetImageResponse.getDefaultInstance()) return this;
+        if (other.hasImageData()) {
+          setImageData(other.getImageData());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setImageData(input.readBytes());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // optional bytes imageData = 1;
+      public boolean hasImageData() {
+        return result.hasImageData();
+      }
+      public com.google.protobuf.ByteString getImageData() {
+        return result.getImageData();
+      }
+      public Builder setImageData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasImageData = true;
+        result.imageData_ = value;
+        return this;
+      }
+      public Builder clearImageData() {
+        result.hasImageData = false;
+        result.imageData_ = getDefaultInstance().getImageData();
+        return this;
+      }
+    }
+    
+    static {
+      com.gc.android.market.api.model.Market.getDescriptor();
+    }
+    
+    static {
+      com.gc.android.market.api.model.Market.internalForceInit();
+    }
+  }
+  
   public static final class Request extends
       com.google.protobuf.GeneratedMessage {
     // Use Request.newBuilder() to construct.
@@ -6350,6 +7051,13 @@ public final class Market {
       public boolean hasCommentsRequest() { return hasCommentsRequest; }
       public com.gc.android.market.api.model.Market.CommentsRequest getCommentsRequest() { return commentsRequest_; }
       
+      // optional .GetImageRequest imageRequest = 11;
+      public static final int IMAGEREQUEST_FIELD_NUMBER = 11;
+      private boolean hasImageRequest;
+      private com.gc.android.market.api.model.Market.GetImageRequest imageRequest_ = com.gc.android.market.api.model.Market.GetImageRequest.getDefaultInstance();
+      public boolean hasImageRequest() { return hasImageRequest; }
+      public com.gc.android.market.api.model.Market.GetImageRequest getImageRequest() { return imageRequest_; }
+      
       // optional .SubCategoriesRequest subCategoriesRequest = 14;
       public static final int SUBCATEGORIESREQUEST_FIELD_NUMBER = 14;
       private boolean hasSubCategoriesRequest;
@@ -6376,6 +7084,9 @@ public final class Market {
         if (hasCommentsRequest()) {
           output.writeMessage(5, getCommentsRequest());
         }
+        if (hasImageRequest()) {
+          output.writeMessage(11, getImageRequest());
+        }
         if (hasSubCategoriesRequest()) {
           output.writeMessage(14, getSubCategoriesRequest());
         }
@@ -6398,6 +7109,10 @@ public final class Market {
         if (hasCommentsRequest()) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(5, getCommentsRequest());
+        }
+        if (hasImageRequest()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(11, getImageRequest());
         }
         if (hasSubCategoriesRequest()) {
           size += com.google.protobuf.CodedOutputStream
@@ -6562,6 +7277,9 @@ public final class Market {
           if (other.hasCommentsRequest()) {
             mergeCommentsRequest(other.getCommentsRequest());
           }
+          if (other.hasImageRequest()) {
+            mergeImageRequest(other.getImageRequest());
+          }
           if (other.hasSubCategoriesRequest()) {
             mergeSubCategoriesRequest(other.getSubCategoriesRequest());
           }
@@ -6609,6 +7327,15 @@ public final class Market {
                 }
                 input.readMessage(subBuilder, extensionRegistry);
                 setCommentsRequest(subBuilder.buildPartial());
+                break;
+              }
+              case 90: {
+                com.gc.android.market.api.model.Market.GetImageRequest.Builder subBuilder = com.gc.android.market.api.model.Market.GetImageRequest.newBuilder();
+                if (hasImageRequest()) {
+                  subBuilder.mergeFrom(getImageRequest());
+                }
+                input.readMessage(subBuilder, extensionRegistry);
+                setImageRequest(subBuilder.buildPartial());
                 break;
               }
               case 114: {
@@ -6705,6 +7432,43 @@ public final class Market {
         public Builder clearCommentsRequest() {
           result.hasCommentsRequest = false;
           result.commentsRequest_ = com.gc.android.market.api.model.Market.CommentsRequest.getDefaultInstance();
+          return this;
+        }
+        
+        // optional .GetImageRequest imageRequest = 11;
+        public boolean hasImageRequest() {
+          return result.hasImageRequest();
+        }
+        public com.gc.android.market.api.model.Market.GetImageRequest getImageRequest() {
+          return result.getImageRequest();
+        }
+        public Builder setImageRequest(com.gc.android.market.api.model.Market.GetImageRequest value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.hasImageRequest = true;
+          result.imageRequest_ = value;
+          return this;
+        }
+        public Builder setImageRequest(com.gc.android.market.api.model.Market.GetImageRequest.Builder builderForValue) {
+          result.hasImageRequest = true;
+          result.imageRequest_ = builderForValue.build();
+          return this;
+        }
+        public Builder mergeImageRequest(com.gc.android.market.api.model.Market.GetImageRequest value) {
+          if (result.hasImageRequest() &&
+              result.imageRequest_ != com.gc.android.market.api.model.Market.GetImageRequest.getDefaultInstance()) {
+            result.imageRequest_ =
+              com.gc.android.market.api.model.Market.GetImageRequest.newBuilder(result.imageRequest_).mergeFrom(value).buildPartial();
+          } else {
+            result.imageRequest_ = value;
+          }
+          result.hasImageRequest = true;
+          return this;
+        }
+        public Builder clearImageRequest() {
+          result.hasImageRequest = false;
+          result.imageRequest_ = com.gc.android.market.api.model.Market.GetImageRequest.getDefaultInstance();
           return this;
         }
         
@@ -7604,6 +8368,13 @@ public final class Market {
       public boolean hasCommentsResponse() { return hasCommentsResponse; }
       public com.gc.android.market.api.model.Market.CommentsResponse getCommentsResponse() { return commentsResponse_; }
       
+      // optional .GetImageResponse imageResponse = 10;
+      public static final int IMAGERESPONSE_FIELD_NUMBER = 10;
+      private boolean hasImageResponse;
+      private com.gc.android.market.api.model.Market.GetImageResponse imageResponse_ = com.gc.android.market.api.model.Market.GetImageResponse.getDefaultInstance();
+      public boolean hasImageResponse() { return hasImageResponse; }
+      public com.gc.android.market.api.model.Market.GetImageResponse getImageResponse() { return imageResponse_; }
+      
       // optional .CategoriesResponse categoriesResponse = 20;
       public static final int CATEGORIESRESPONSE_FIELD_NUMBER = 20;
       private boolean hasCategoriesResponse;
@@ -7633,6 +8404,9 @@ public final class Market {
         if (hasCommentsResponse()) {
           output.writeMessage(4, getCommentsResponse());
         }
+        if (hasImageResponse()) {
+          output.writeMessage(10, getImageResponse());
+        }
         if (hasSubCategoriesResponse()) {
           output.writeMessage(13, getSubCategoriesResponse());
         }
@@ -7659,6 +8433,10 @@ public final class Market {
         if (hasCommentsResponse()) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(4, getCommentsResponse());
+        }
+        if (hasImageResponse()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(10, getImageResponse());
         }
         if (hasSubCategoriesResponse()) {
           size += com.google.protobuf.CodedOutputStream
@@ -7826,6 +8604,9 @@ public final class Market {
           if (other.hasCommentsResponse()) {
             mergeCommentsResponse(other.getCommentsResponse());
           }
+          if (other.hasImageResponse()) {
+            mergeImageResponse(other.getImageResponse());
+          }
           if (other.hasCategoriesResponse()) {
             mergeCategoriesResponse(other.getCategoriesResponse());
           }
@@ -7882,6 +8663,15 @@ public final class Market {
                 }
                 input.readMessage(subBuilder, extensionRegistry);
                 setCommentsResponse(subBuilder.buildPartial());
+                break;
+              }
+              case 82: {
+                com.gc.android.market.api.model.Market.GetImageResponse.Builder subBuilder = com.gc.android.market.api.model.Market.GetImageResponse.newBuilder();
+                if (hasImageResponse()) {
+                  subBuilder.mergeFrom(getImageResponse());
+                }
+                input.readMessage(subBuilder, extensionRegistry);
+                setImageResponse(subBuilder.buildPartial());
                 break;
               }
               case 106: {
@@ -8015,6 +8805,43 @@ public final class Market {
         public Builder clearCommentsResponse() {
           result.hasCommentsResponse = false;
           result.commentsResponse_ = com.gc.android.market.api.model.Market.CommentsResponse.getDefaultInstance();
+          return this;
+        }
+        
+        // optional .GetImageResponse imageResponse = 10;
+        public boolean hasImageResponse() {
+          return result.hasImageResponse();
+        }
+        public com.gc.android.market.api.model.Market.GetImageResponse getImageResponse() {
+          return result.getImageResponse();
+        }
+        public Builder setImageResponse(com.gc.android.market.api.model.Market.GetImageResponse value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.hasImageResponse = true;
+          result.imageResponse_ = value;
+          return this;
+        }
+        public Builder setImageResponse(com.gc.android.market.api.model.Market.GetImageResponse.Builder builderForValue) {
+          result.hasImageResponse = true;
+          result.imageResponse_ = builderForValue.build();
+          return this;
+        }
+        public Builder mergeImageResponse(com.gc.android.market.api.model.Market.GetImageResponse value) {
+          if (result.hasImageResponse() &&
+              result.imageResponse_ != com.gc.android.market.api.model.Market.GetImageResponse.getDefaultInstance()) {
+            result.imageResponse_ =
+              com.gc.android.market.api.model.Market.GetImageResponse.newBuilder(result.imageResponse_).mergeFrom(value).buildPartial();
+          } else {
+            result.imageResponse_ = value;
+          }
+          result.hasImageResponse = true;
+          return this;
+        }
+        public Builder clearImageResponse() {
+          result.hasImageResponse = false;
+          result.imageResponse_ = com.gc.android.market.api.model.Market.GetImageResponse.getDefaultInstance();
           return this;
         }
         
@@ -8458,6 +9285,16 @@ public final class Market {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_RequestContext_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_GetImageRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_GetImageRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_GetImageResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_GetImageResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Request_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8525,7 +9362,7 @@ public final class Market {
       "eenshotsCount\030\036 \001(\005\022\021\n\tpromoText\030\037 \001(\t\"c" +
       "\n\007Comment\022\014\n\004text\030\001 \001(\t\022\016\n\006rating\030\002 \001(\005\022" +
       "\022\n\nauthorName\030\003 \001(\t\022\024\n\014creationTime\030\004 \001(" +
-      "\005\022\020\n\010authorId\030\005 \001(\t\"\023\n\021CategoriesRequest" +
+      "\004\022\020\n\010authorId\030\005 \001(\t\"\023\n\021CategoriesRequest" +
       "\"3\n\022CategoriesResponse\022\035\n\ncategories\030\001 \003" +
       "(\0132\t.Category\"1\n\024SubCategoriesRequest\022\031\n" +
       "\007appType\030\001 \001(\0162\010.AppType\"g\n\025SubCategorie" +
@@ -8537,27 +9374,35 @@ public final class Market {
       "Version\030\005 \001(\t\022\024\n\014userLanguage\030\006 \001(\t\022\023\n\013u" +
       "serCountry\030\007 \001(\t\022\025\n\roperatorAlpha\030\010 \001(\t\022" +
       "\030\n\020simOperatorAlpha\030\t \001(\t\022\027\n\017operatorNum" +
-      "eric\030\n \001(\t\022\032\n\022simOperatorNumeric\030\013 \001(\t\"\233" +
-      "\002\n\007Request\022 \n\007context\030\001 \001(\0132\017.RequestCon" +
-      "text\022+\n\014requestgroup\030\002 \003(\n2\025.Request.Req" +
-      "uestGroup\032\300\001\n\014RequestGroup\022!\n\013appsReques",
-      "t\030\004 \001(\0132\014.AppsRequest\022)\n\017commentsRequest" +
-      "\030\005 \001(\0132\020.CommentsRequest\0223\n\024subCategorie" +
-      "sRequest\030\016 \001(\0132\025.SubCategoriesRequest\022-\n" +
-      "\021categoriesRequest\030\025 \001(\0132\022.CategoriesReq" +
-      "uest\"W\n\017ResponseContext\022\016\n\006result\030\001 \001(\005\022" +
-      "\020\n\010unknown1\030\002 \001(\005\022\020\n\010unknown2\030\003 \001(\t\022\020\n\010u" +
-      "nknown3\030\004 \001(\005\"\251\002\n\010Response\022.\n\rresponsegr" +
-      "oup\030\001 \003(\n2\027.Response.ResponseGroup\032\354\001\n\rR" +
-      "esponseGroup\022!\n\007context\030\002 \001(\0132\020.Response" +
-      "Context\022#\n\014appsResponse\030\003 \001(\0132\r.AppsResp",
-      "onse\022+\n\020commentsResponse\030\004 \001(\0132\021.Comment" +
-      "sResponse\022/\n\022categoriesResponse\030\024 \001(\0132\023." +
-      "CategoriesResponse\0225\n\025subCategoriesRespo" +
-      "nse\030\r \001(\0132\026.SubCategoriesResponse*K\n\007App" +
-      "Type\022\010\n\004NONE\020\000\022\017\n\013APPLICATION\020\001\022\014\n\010RINGT" +
-      "ONE\020\002\022\r\n\tWALLPAPER\020\003\022\010\n\004GAME\020\004B!\n\037com.gc" +
-      ".android.market.api.model"
+      "eric\030\n \001(\t\022\032\n\022simOperatorNumeric\030\013 \001(\t\"\314" +
+      "\001\n\017GetImageRequest\022\r\n\005appId\030\001 \001(\t\0222\n\nima" +
+      "geUsage\030\003 \001(\0162\036.GetImageRequest.AppImage" +
+      "Usage\022\017\n\007imageId\030\004 \001(\t\"e\n\rAppImageUsage\022",
+      "\010\n\004ICON\020\000\022\016\n\nSCREENSHOT\020\001\022\030\n\024SCREENSHOT_" +
+      "THUMBNAIL\020\002\022\017\n\013PROMO_BADGE\020\003\022\017\n\013BILING_I" +
+      "CON\020\004\"%\n\020GetImageResponse\022\021\n\timageData\030\001" +
+      " \001(\014\"\303\002\n\007Request\022 \n\007context\030\001 \001(\0132\017.Requ" +
+      "estContext\022+\n\014requestgroup\030\002 \003(\n2\025.Reque" +
+      "st.RequestGroup\032\350\001\n\014RequestGroup\022!\n\013apps" +
+      "Request\030\004 \001(\0132\014.AppsRequest\022)\n\017commentsR" +
+      "equest\030\005 \001(\0132\020.CommentsRequest\022&\n\014imageR" +
+      "equest\030\013 \001(\0132\020.GetImageRequest\0223\n\024subCat" +
+      "egoriesRequest\030\016 \001(\0132\025.SubCategoriesRequ",
+      "est\022-\n\021categoriesRequest\030\025 \001(\0132\022.Categor" +
+      "iesRequest\"W\n\017ResponseContext\022\016\n\006result\030" +
+      "\001 \001(\005\022\020\n\010unknown1\030\002 \001(\005\022\020\n\010unknown2\030\003 \001(" +
+      "\t\022\020\n\010unknown3\030\004 \001(\005\"\323\002\n\010Response\022.\n\rresp" +
+      "onsegroup\030\001 \003(\n2\027.Response.ResponseGroup" +
+      "\032\226\002\n\rResponseGroup\022!\n\007context\030\002 \001(\0132\020.Re" +
+      "sponseContext\022#\n\014appsResponse\030\003 \001(\0132\r.Ap" +
+      "psResponse\022+\n\020commentsResponse\030\004 \001(\0132\021.C" +
+      "ommentsResponse\022(\n\rimageResponse\030\n \001(\0132\021" +
+      ".GetImageResponse\022/\n\022categoriesResponse\030",
+      "\024 \001(\0132\023.CategoriesResponse\0225\n\025subCategor" +
+      "iesResponse\030\r \001(\0132\026.SubCategoriesRespons" +
+      "e*K\n\007AppType\022\010\n\004NONE\020\000\022\017\n\013APPLICATION\020\001\022" +
+      "\014\n\010RINGTONE\020\002\022\r\n\tWALLPAPER\020\003\022\010\n\004GAME\020\004B!" +
+      "\n\037com.gc.android.market.api.model"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8668,8 +9513,24 @@ public final class Market {
               new java.lang.String[] { "AuthSubToken", "Unknown1", "Version", "AndroidId", "DeviceAndSdkVersion", "UserLanguage", "UserCountry", "OperatorAlpha", "SimOperatorAlpha", "OperatorNumeric", "SimOperatorNumeric", },
               com.gc.android.market.api.model.Market.RequestContext.class,
               com.gc.android.market.api.model.Market.RequestContext.Builder.class);
-          internal_static_Request_descriptor =
+          internal_static_GetImageRequest_descriptor =
             getDescriptor().getMessageTypes().get(12);
+          internal_static_GetImageRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_GetImageRequest_descriptor,
+              new java.lang.String[] { "AppId", "ImageUsage", "ImageId", },
+              com.gc.android.market.api.model.Market.GetImageRequest.class,
+              com.gc.android.market.api.model.Market.GetImageRequest.Builder.class);
+          internal_static_GetImageResponse_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+          internal_static_GetImageResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_GetImageResponse_descriptor,
+              new java.lang.String[] { "ImageData", },
+              com.gc.android.market.api.model.Market.GetImageResponse.class,
+              com.gc.android.market.api.model.Market.GetImageResponse.Builder.class);
+          internal_static_Request_descriptor =
+            getDescriptor().getMessageTypes().get(14);
           internal_static_Request_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Request_descriptor,
@@ -8681,11 +9542,11 @@ public final class Market {
           internal_static_Request_RequestGroup_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Request_RequestGroup_descriptor,
-              new java.lang.String[] { "AppsRequest", "CommentsRequest", "SubCategoriesRequest", "CategoriesRequest", },
+              new java.lang.String[] { "AppsRequest", "CommentsRequest", "ImageRequest", "SubCategoriesRequest", "CategoriesRequest", },
               com.gc.android.market.api.model.Market.Request.RequestGroup.class,
               com.gc.android.market.api.model.Market.Request.RequestGroup.Builder.class);
           internal_static_ResponseContext_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_ResponseContext_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_ResponseContext_descriptor,
@@ -8693,7 +9554,7 @@ public final class Market {
               com.gc.android.market.api.model.Market.ResponseContext.class,
               com.gc.android.market.api.model.Market.ResponseContext.Builder.class);
           internal_static_Response_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_Response_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Response_descriptor,
@@ -8705,7 +9566,7 @@ public final class Market {
           internal_static_Response_ResponseGroup_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Response_ResponseGroup_descriptor,
-              new java.lang.String[] { "Context", "AppsResponse", "CommentsResponse", "CategoriesResponse", "SubCategoriesResponse", },
+              new java.lang.String[] { "Context", "AppsResponse", "CommentsResponse", "ImageResponse", "CategoriesResponse", "SubCategoriesResponse", },
               com.gc.android.market.api.model.Market.Response.ResponseGroup.class,
               com.gc.android.market.api.model.Market.Response.ResponseGroup.Builder.class);
           return null;
