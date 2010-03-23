@@ -1,0 +1,33 @@
+raise "Needs JRuby 1.5" unless RUBY_PLATFORM =~ /java/
+require 'ant'
+
+build_dir = "classes"
+directory build_dir
+
+task :default => :compile
+
+desc "runs main (LOGIN=email:password)"
+task :run => :compile do
+   ant.java(:classname=>"com.gc.android.market.api.Main", :classpathref=>"project.class.path") do
+   arg :line => ENV['LOGIN'].to_s.split(':').join(' ')
+  end
+end
+
+task :setup => build_dir do
+  ant.property :name => "src.dir", :value => "src"
+  ant.path(:id => "project.class.path") do
+    pathelement :location => build_dir
+    pathelement :location => "protobuf-java-2.2.0.jar"
+  end
+end
+
+task :compile => :setup do
+  ant.javac(:destdir => build_dir) do
+    classpath :refid => "project.class.path"
+    src { pathelement :location => "${src.dir}" }
+  end
+end
+
+task :jar => :compile do
+  ant.jar(:destfile => "AndroidMarketApi.jar", :basedir=>build_dir)
+end
