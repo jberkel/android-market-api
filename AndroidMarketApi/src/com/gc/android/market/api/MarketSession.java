@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -150,6 +151,26 @@ public class MarketSession {
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+	
+	public List<Object> queryApp(AppsRequest requestGroup)
+	{
+		List<Object> retList = new ArrayList<Object>();
+		
+		request.addRequestGroup(RequestGroup.newBuilder().setAppsRequest(requestGroup));
+		
+		RequestContext ctxt = context.build();
+		context = RequestContext.newBuilder(ctxt);
+		request.setContext(ctxt);
+		Response resp = executeProtobuf(request.build());
+		for(ResponseGroup grp : resp.getResponseGroupList()) {
+			if(grp.hasAppsResponse())
+				retList.add(grp.getAppsResponse());
+		}
+		
+		request = Request.newBuilder();
+		
+		return retList;
 	}
 	
 	public void append(AppsRequest requestGroup, Callback<AppsResponse> responseCallback) {
