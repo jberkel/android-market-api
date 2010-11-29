@@ -73,7 +73,7 @@ public class MarketSession {
 		context.setAndroidId("0000000000000000");
 		//context.setAndroidId( hexadecimal(0123132123123113213).toLowerCase());
 		setLocale(Locale.getDefault());
-		context.setDeviceAndSdkVersion("sapphire:7");
+		context.setDeviceAndSdkVersion("passion:8");
 		setOperatorTMobile();
 	}
 	
