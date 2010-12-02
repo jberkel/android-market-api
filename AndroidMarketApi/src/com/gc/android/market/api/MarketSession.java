@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.zip.GZIPInputStream;
@@ -24,11 +25,11 @@ import com.gc.android.market.api.model.Market.CommentsResponse;
 import com.gc.android.market.api.model.Market.GetImageRequest;
 import com.gc.android.market.api.model.Market.GetImageResponse;
 import com.gc.android.market.api.model.Market.Request;
+import com.gc.android.market.api.model.Market.Request.RequestGroup;
 import com.gc.android.market.api.model.Market.RequestContext;
 import com.gc.android.market.api.model.Market.Response;
-import com.gc.android.market.api.model.Market.ResponseContext;
-import com.gc.android.market.api.model.Market.Request.RequestGroup;
 import com.gc.android.market.api.model.Market.Response.ResponseGroup;
+import com.gc.android.market.api.model.Market.ResponseContext;
 
 /**
  * MarketSession session = new MarketSession();
@@ -148,6 +149,23 @@ public class MarketSession {
 				throw new RuntimeException("authKey not found in "+data);
 
 			setAuthSubToken(authKey);
+		} catch(Tools.HttpException httpEx) {
+			if(httpEx.getErrorCode() != 403)
+				throw httpEx;
+			
+			String data = httpEx.getErrorData();
+			StringTokenizer st = new StringTokenizer(data, "\n\r=");
+			String googleErrorCode = null;
+			while (st.hasMoreTokens()) {
+				if (st.nextToken().equalsIgnoreCase("Error")) {
+					googleErrorCode = st.nextToken();
+					break;
+				}
+			}
+			if(googleErrorCode == null)
+				throw httpEx;
+			
+			throw new LoginException(googleErrorCode);
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
@@ -229,7 +247,11 @@ public class MarketSession {
 		byte[] requestBytes = request.toByteArray();
 		byte[] responseBytes = executeRawHttpQuery(requestBytes);
 		try {
-			return Response.parseFrom(responseBytes);
+			Response r = Response.parseFrom(responseBytes);
+//			for(Entry<Integer,UnknownFieldSet.Field> o : r.getUnknownFields().asMap().entrySet()) {
+//				System.out.println(o.getKey() + "=" + o.getValue());
+//			}
+			return r;
 		} catch(Exception ex) {
 			throw new RuntimeException(ex);
 		}

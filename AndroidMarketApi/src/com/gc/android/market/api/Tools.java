@@ -10,6 +10,28 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 public class Tools {
+	
+	public static class HttpException extends RuntimeException {
+		
+		private int errorCode;
+		private String errorData;
+		
+		public HttpException(int errorCode, String errorData) {
+			super("HTTP Code "+errorCode+" : "+errorData);
+			this.errorCode = errorCode;
+			this.errorData = errorData;
+		}
+
+		public int getErrorCode() {
+			return errorCode;
+		}
+
+		public String getErrorData() {
+			return errorData;
+		}
+		
+		
+	}
 
 	public static String postUrl(String url, Map<String, String> params) throws IOException {
 		String data = "";
@@ -23,18 +45,44 @@ public class Tools {
 		URL aURL = new java.net.URL(url);
 		HttpURLConnection aConnection = (java.net.HttpURLConnection) aURL
 				.openConnection();
-		aConnection.setDoOutput(true);
-		aConnection.setDoInput(true);
-		aConnection.setRequestMethod("POST");
-		//aConnection.setAllowUserInteraction(false);
-		// POST the data
-		OutputStreamWriter streamToAuthorize = new java.io.OutputStreamWriter(
-				aConnection.getOutputStream());
-		streamToAuthorize.write(data);
-		streamToAuthorize.flush();
-		streamToAuthorize.close();
-		// Get the Response from Autorize.net
-		InputStream resultStream = aConnection.getInputStream();
+		try {
+			aConnection.setDoOutput(true);
+			aConnection.setDoInput(true);
+			aConnection.setRequestMethod("POST");
+			//aConnection.setAllowUserInteraction(false);
+			// POST the data
+			OutputStreamWriter streamToAuthorize = new java.io.OutputStreamWriter(
+					aConnection.getOutputStream());
+			streamToAuthorize.write(data);
+			streamToAuthorize.flush();
+			streamToAuthorize.close();
+			
+			// check error
+			int errorCode = aConnection.getResponseCode();
+			if(errorCode >= 400) {
+				InputStream errorStream = aConnection.getErrorStream();
+				try {
+					String errorData = streamToString(errorStream);
+					throw new HttpException(errorCode,errorData);
+				} finally {
+					errorStream.close();
+				}
+			}
+			
+			// Get the Response
+			InputStream resultStream = aConnection.getInputStream();
+			try {
+				String responseData = streamToString(resultStream);
+				return responseData;
+			} finally {
+				resultStream.close();
+			}
+		} finally {
+			aConnection.disconnect();
+		}
+	}
+	
+	private static String streamToString(InputStream resultStream) throws IOException {
 		BufferedReader aReader = new java.io.BufferedReader(
 				new java.io.InputStreamReader(resultStream));
 		StringBuffer aResponse = new StringBuffer();
@@ -43,8 +91,8 @@ public class Tools {
 			aResponse.append(aLine+"\n");
 			aLine = aReader.readLine();
 		}
-		resultStream.close();
 		return aResponse.toString();
+		
 	}
 
 	
