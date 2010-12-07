@@ -269,7 +269,7 @@ public class MarketSession {
 			cnx.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			cnx.setRequestProperty("Accept-Charset","ISO-8859-1,utf-8;q=0.7,*;q=0.7");
 			
-			String request64 = Base64.encodeBytes(request);
+			String request64 = Base64.encodeBytes(request,Base64.URL_SAFE);
 			
 			String requestData = "version="+PROTOCOL_VERSION+"&request="+request64;
 			
