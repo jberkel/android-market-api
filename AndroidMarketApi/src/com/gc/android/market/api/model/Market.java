@@ -2499,6 +2499,20 @@ public final class Market {
       public boolean hasPromoText() { return hasPromoText; }
       public java.lang.String getPromoText() { return promoText_; }
       
+      // optional string recentChanges = 38;
+      public static final int RECENTCHANGES_FIELD_NUMBER = 38;
+      private boolean hasRecentChanges;
+      private java.lang.String recentChanges_ = "";
+      public boolean hasRecentChanges() { return hasRecentChanges; }
+      public java.lang.String getRecentChanges() { return recentChanges_; }
+      
+      // optional string promotionalVideo = 43;
+      public static final int PROMOTIONALVIDEO_FIELD_NUMBER = 43;
+      private boolean hasPromotionalVideo;
+      private java.lang.String promotionalVideo_ = "";
+      public boolean hasPromotionalVideo() { return hasPromotionalVideo; }
+      public java.lang.String getPromotionalVideo() { return promotionalVideo_; }
+      
       public final boolean isInitialized() {
         return true;
       }
@@ -2540,6 +2554,12 @@ public final class Market {
         }
         if (hasPromoText()) {
           output.writeString(31, getPromoText());
+        }
+        if (hasRecentChanges()) {
+          output.writeString(38, getRecentChanges());
+        }
+        if (hasPromotionalVideo()) {
+          output.writeString(43, getPromotionalVideo());
         }
         getUnknownFields().writeTo(output);
       }
@@ -2602,6 +2622,14 @@ public final class Market {
         if (hasPromoText()) {
           size += com.google.protobuf.CodedOutputStream
             .computeStringSize(31, getPromoText());
+        }
+        if (hasRecentChanges()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(38, getRecentChanges());
+        }
+        if (hasPromotionalVideo()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeStringSize(43, getPromotionalVideo());
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -2795,6 +2823,12 @@ public final class Market {
           if (other.hasPromoText()) {
             setPromoText(other.getPromoText());
           }
+          if (other.hasRecentChanges()) {
+            setRecentChanges(other.getRecentChanges());
+          }
+          if (other.hasPromotionalVideo()) {
+            setPromotionalVideo(other.getPromotionalVideo());
+          }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
         }
@@ -2866,6 +2900,14 @@ public final class Market {
               }
               case 250: {
                 setPromoText(input.readString());
+                break;
+              }
+              case 306: {
+                setRecentChanges(input.readString());
+                break;
+              }
+              case 346: {
+                setPromotionalVideo(input.readString());
                 break;
               }
             }
@@ -3132,6 +3174,48 @@ public final class Market {
         public Builder clearPromoText() {
           result.hasPromoText = false;
           result.promoText_ = getDefaultInstance().getPromoText();
+          return this;
+        }
+        
+        // optional string recentChanges = 38;
+        public boolean hasRecentChanges() {
+          return result.hasRecentChanges();
+        }
+        public java.lang.String getRecentChanges() {
+          return result.getRecentChanges();
+        }
+        public Builder setRecentChanges(java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasRecentChanges = true;
+          result.recentChanges_ = value;
+          return this;
+        }
+        public Builder clearRecentChanges() {
+          result.hasRecentChanges = false;
+          result.recentChanges_ = getDefaultInstance().getRecentChanges();
+          return this;
+        }
+        
+        // optional string promotionalVideo = 43;
+        public boolean hasPromotionalVideo() {
+          return result.hasPromotionalVideo();
+        }
+        public java.lang.String getPromotionalVideo() {
+          return result.getPromotionalVideo();
+        }
+        public Builder setPromotionalVideo(java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasPromotionalVideo = true;
+          result.promotionalVideo_ = value;
+          return this;
+        }
+        public Builder clearPromotionalVideo() {
+          result.hasPromotionalVideo = false;
+          result.promotionalVideo_ = getDefaultInstance().getPromotionalVideo();
           return this;
         }
       }
@@ -9345,64 +9429,66 @@ public final class Market {
       "quest\022\r\n\005appId\030\001 \001(\t\022\022\n\nstartIndex\030\002 \001(\005" +
       "\022\024\n\014entriesCount\030\003 \001(\005\"D\n\020CommentsRespon" +
       "se\022\032\n\010comments\030\001 \003(\0132\010.Comment\022\024\n\014entrie" +
-      "sCount\030\002 \001(\005\"\307\004\n\003App\022\n\n\002id\030\001 \001(\t\022\r\n\005titl" +
+      "sCount\030\002 \001(\005\"\370\004\n\003App\022\n\n\002id\030\001 \001(\t\022\r\n\005titl" +
       "e\030\002 \001(\t\022\037\n\007appType\030\003 \001(\0162\010.AppType:\004NONE" +
       "\022\017\n\007creator\030\004 \001(\t\022\017\n\007version\030\005 \001(\t\022\r\n\005pr",
       "ice\030\006 \001(\t\022\016\n\006rating\030\007 \001(\t\022\024\n\014ratingsCoun" +
       "t\030\010 \001(\005\022\'\n\014extendedinfo\030\014 \001(\n2\021.App.Exte" +
       "ndedInfo\022\021\n\tcreatorId\030\026 \001(\t\022\023\n\013packageNa" +
       "me\030\030 \001(\t\022\023\n\013versionCode\030\031 \001(\005\022\025\n\rpriceCu" +
-      "rrency\030  \001(\t\022\023\n\013priceMicros\030! \001(\005\032\232\002\n\014Ex" +
+      "rrency\030  \001(\t\022\023\n\013priceMicros\030! \001(\005\032\313\002\n\014Ex" +
       "tendedInfo\022\023\n\013description\030\r \001(\t\022\026\n\016downl" +
       "oadsCount\030\016 \001(\005\022\024\n\014permissionId\030\017 \003(\t\022\023\n" +
       "\013installSize\030\020 \001(\005\022\023\n\013packageName\030\021 \001(\t\022" +
       "\020\n\010category\030\022 \001(\t\022\024\n\014contactEmail\030\024 \001(\t\022" +
       "\032\n\022downloadsCountText\030\027 \001(\t\022\024\n\014contactPh",
       "one\030\032 \001(\t\022\026\n\016contactWebsite\030\033 \001(\t\022\030\n\020scr" +
-      "eenshotsCount\030\036 \001(\005\022\021\n\tpromoText\030\037 \001(\t\"c" +
-      "\n\007Comment\022\014\n\004text\030\001 \001(\t\022\016\n\006rating\030\002 \001(\005\022" +
-      "\022\n\nauthorName\030\003 \001(\t\022\024\n\014creationTime\030\004 \001(" +
-      "\004\022\020\n\010authorId\030\005 \001(\t\"\023\n\021CategoriesRequest" +
-      "\"3\n\022CategoriesResponse\022\035\n\ncategories\030\001 \003" +
-      "(\0132\t.Category\"1\n\024SubCategoriesRequest\022\031\n" +
-      "\007appType\030\001 \001(\0162\010.AppType\"g\n\025SubCategorie" +
-      "sResponse\022\033\n\010category\030\001 \003(\0132\t.Category\022\032" +
-      "\n\022subCategoryDisplay\030\002 \001(\t\022\025\n\rsubCategor",
-      "yId\030\003 \001(\005\"\212\002\n\016RequestContext\022\024\n\014authSubT" +
-      "oken\030\001 \002(\t\022\020\n\010unknown1\030\002 \002(\005\022\017\n\007version\030" +
-      "\003 \002(\005\022\021\n\tandroidId\030\004 \002(\t\022\033\n\023deviceAndSdk" +
-      "Version\030\005 \001(\t\022\024\n\014userLanguage\030\006 \001(\t\022\023\n\013u" +
-      "serCountry\030\007 \001(\t\022\025\n\roperatorAlpha\030\010 \001(\t\022" +
-      "\030\n\020simOperatorAlpha\030\t \001(\t\022\027\n\017operatorNum" +
-      "eric\030\n \001(\t\022\032\n\022simOperatorNumeric\030\013 \001(\t\"\314" +
-      "\001\n\017GetImageRequest\022\r\n\005appId\030\001 \001(\t\0222\n\nima" +
-      "geUsage\030\003 \001(\0162\036.GetImageRequest.AppImage" +
-      "Usage\022\017\n\007imageId\030\004 \001(\t\"e\n\rAppImageUsage\022",
-      "\010\n\004ICON\020\000\022\016\n\nSCREENSHOT\020\001\022\030\n\024SCREENSHOT_" +
-      "THUMBNAIL\020\002\022\017\n\013PROMO_BADGE\020\003\022\017\n\013BILING_I" +
-      "CON\020\004\"%\n\020GetImageResponse\022\021\n\timageData\030\001" +
-      " \001(\014\"\303\002\n\007Request\022 \n\007context\030\001 \001(\0132\017.Requ" +
-      "estContext\022+\n\014requestgroup\030\002 \003(\n2\025.Reque" +
-      "st.RequestGroup\032\350\001\n\014RequestGroup\022!\n\013apps" +
-      "Request\030\004 \001(\0132\014.AppsRequest\022)\n\017commentsR" +
-      "equest\030\005 \001(\0132\020.CommentsRequest\022&\n\014imageR" +
-      "equest\030\013 \001(\0132\020.GetImageRequest\0223\n\024subCat" +
-      "egoriesRequest\030\016 \001(\0132\025.SubCategoriesRequ",
-      "est\022-\n\021categoriesRequest\030\025 \001(\0132\022.Categor" +
-      "iesRequest\"W\n\017ResponseContext\022\016\n\006result\030" +
-      "\001 \001(\005\022\020\n\010unknown1\030\002 \001(\005\022\020\n\010unknown2\030\003 \001(" +
-      "\t\022\020\n\010unknown3\030\004 \001(\005\"\323\002\n\010Response\022.\n\rresp" +
-      "onsegroup\030\001 \003(\n2\027.Response.ResponseGroup" +
-      "\032\226\002\n\rResponseGroup\022!\n\007context\030\002 \001(\0132\020.Re" +
-      "sponseContext\022#\n\014appsResponse\030\003 \001(\0132\r.Ap" +
-      "psResponse\022+\n\020commentsResponse\030\004 \001(\0132\021.C" +
-      "ommentsResponse\022(\n\rimageResponse\030\n \001(\0132\021" +
-      ".GetImageResponse\022/\n\022categoriesResponse\030",
-      "\024 \001(\0132\023.CategoriesResponse\0225\n\025subCategor" +
-      "iesResponse\030\r \001(\0132\026.SubCategoriesRespons" +
-      "e*K\n\007AppType\022\010\n\004NONE\020\000\022\017\n\013APPLICATION\020\001\022" +
-      "\014\n\010RINGTONE\020\002\022\r\n\tWALLPAPER\020\003\022\010\n\004GAME\020\004B!" +
-      "\n\037com.gc.android.market.api.model"
+      "eenshotsCount\030\036 \001(\005\022\021\n\tpromoText\030\037 \001(\t\022\025" +
+      "\n\rrecentChanges\030& \001(\t\022\030\n\020promotionalVide" +
+      "o\030+ \001(\t\"c\n\007Comment\022\014\n\004text\030\001 \001(\t\022\016\n\006rati" +
+      "ng\030\002 \001(\005\022\022\n\nauthorName\030\003 \001(\t\022\024\n\014creation" +
+      "Time\030\004 \001(\004\022\020\n\010authorId\030\005 \001(\t\"\023\n\021Categori" +
+      "esRequest\"3\n\022CategoriesResponse\022\035\n\ncateg" +
+      "ories\030\001 \003(\0132\t.Category\"1\n\024SubCategoriesR" +
+      "equest\022\031\n\007appType\030\001 \001(\0162\010.AppType\"g\n\025Sub" +
+      "CategoriesResponse\022\033\n\010category\030\001 \003(\0132\t.C",
+      "ategory\022\032\n\022subCategoryDisplay\030\002 \001(\t\022\025\n\rs" +
+      "ubCategoryId\030\003 \001(\005\"\212\002\n\016RequestContext\022\024\n" +
+      "\014authSubToken\030\001 \002(\t\022\020\n\010unknown1\030\002 \002(\005\022\017\n" +
+      "\007version\030\003 \002(\005\022\021\n\tandroidId\030\004 \002(\t\022\033\n\023dev" +
+      "iceAndSdkVersion\030\005 \001(\t\022\024\n\014userLanguage\030\006" +
+      " \001(\t\022\023\n\013userCountry\030\007 \001(\t\022\025\n\roperatorAlp" +
+      "ha\030\010 \001(\t\022\030\n\020simOperatorAlpha\030\t \001(\t\022\027\n\017op" +
+      "eratorNumeric\030\n \001(\t\022\032\n\022simOperatorNumeri" +
+      "c\030\013 \001(\t\"\314\001\n\017GetImageRequest\022\r\n\005appId\030\001 \001" +
+      "(\t\0222\n\nimageUsage\030\003 \001(\0162\036.GetImageRequest",
+      ".AppImageUsage\022\017\n\007imageId\030\004 \001(\t\"e\n\rAppIm" +
+      "ageUsage\022\010\n\004ICON\020\000\022\016\n\nSCREENSHOT\020\001\022\030\n\024SC" +
+      "REENSHOT_THUMBNAIL\020\002\022\017\n\013PROMO_BADGE\020\003\022\017\n" +
+      "\013BILING_ICON\020\004\"%\n\020GetImageResponse\022\021\n\tim" +
+      "ageData\030\001 \001(\014\"\303\002\n\007Request\022 \n\007context\030\001 \001" +
+      "(\0132\017.RequestContext\022+\n\014requestgroup\030\002 \003(" +
+      "\n2\025.Request.RequestGroup\032\350\001\n\014RequestGrou" +
+      "p\022!\n\013appsRequest\030\004 \001(\0132\014.AppsRequest\022)\n\017" +
+      "commentsRequest\030\005 \001(\0132\020.CommentsRequest\022" +
+      "&\n\014imageRequest\030\013 \001(\0132\020.GetImageRequest\022",
+      "3\n\024subCategoriesRequest\030\016 \001(\0132\025.SubCateg" +
+      "oriesRequest\022-\n\021categoriesRequest\030\025 \001(\0132" +
+      "\022.CategoriesRequest\"W\n\017ResponseContext\022\016" +
+      "\n\006result\030\001 \001(\005\022\020\n\010unknown1\030\002 \001(\005\022\020\n\010unkn" +
+      "own2\030\003 \001(\t\022\020\n\010unknown3\030\004 \001(\005\"\323\002\n\010Respons" +
+      "e\022.\n\rresponsegroup\030\001 \003(\n2\027.Response.Resp" +
+      "onseGroup\032\226\002\n\rResponseGroup\022!\n\007context\030\002" +
+      " \001(\0132\020.ResponseContext\022#\n\014appsResponse\030\003" +
+      " \001(\0132\r.AppsResponse\022+\n\020commentsResponse\030" +
+      "\004 \001(\0132\021.CommentsResponse\022(\n\rimageRespons",
+      "e\030\n \001(\0132\021.GetImageResponse\022/\n\022categories" +
+      "Response\030\024 \001(\0132\023.CategoriesResponse\0225\n\025s" +
+      "ubCategoriesResponse\030\r \001(\0132\026.SubCategori" +
+      "esResponse*K\n\007AppType\022\010\n\004NONE\020\000\022\017\n\013APPLI" +
+      "CATION\020\001\022\014\n\010RINGTONE\020\002\022\r\n\tWALLPAPER\020\003\022\010\n" +
+      "\004GAME\020\004B!\n\037com.gc.android.market.api.mod" +
+      "el"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9462,7 +9548,7 @@ public final class Market {
           internal_static_App_ExtendedInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_App_ExtendedInfo_descriptor,
-              new java.lang.String[] { "Description", "DownloadsCount", "PermissionId", "InstallSize", "PackageName", "Category", "ContactEmail", "DownloadsCountText", "ContactPhone", "ContactWebsite", "ScreenshotsCount", "PromoText", },
+              new java.lang.String[] { "Description", "DownloadsCount", "PermissionId", "InstallSize", "PackageName", "Category", "ContactEmail", "DownloadsCountText", "ContactPhone", "ContactWebsite", "ScreenshotsCount", "PromoText", "RecentChanges", "PromotionalVideo", },
               com.gc.android.market.api.model.Market.App.ExtendedInfo.class,
               com.gc.android.market.api.model.Market.App.ExtendedInfo.Builder.class);
           internal_static_Comment_descriptor =
