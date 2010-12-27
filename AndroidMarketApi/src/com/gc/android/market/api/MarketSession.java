@@ -180,14 +180,15 @@ public class MarketSession {
 		RequestContext ctxt = context.build();
 		context = RequestContext.newBuilder(ctxt);
 		request.setContext(ctxt);
-		Response resp = executeProtobuf(request.build());
-		for(ResponseGroup grp : resp.getResponseGroupList()) {
-			if(grp.hasAppsResponse())
-				retList.add(grp.getAppsResponse());
+		try {
+			Response resp = executeProtobuf(request.build());
+			for(ResponseGroup grp : resp.getResponseGroupList()) {
+				if(grp.hasAppsResponse())
+					retList.add(grp.getAppsResponse());
+			}
+		} finally {
+			request = Request.newBuilder();
 		}
-		
-		request = Request.newBuilder();
-		
 		return retList;
 	}
 	
@@ -216,23 +217,26 @@ public class MarketSession {
 		RequestContext ctxt = context.build();
 		context = RequestContext.newBuilder(ctxt);
 		request.setContext(ctxt);
-		Response resp = executeProtobuf(request.build());
-		int i = 0;
-		for(ResponseGroup grp : resp.getResponseGroupList()) {
-			Object val = null;
-			if(grp.hasAppsResponse())
-				val = grp.getAppsResponse();
-			if(grp.hasCategoriesResponse())
-				val = grp.getCategoriesResponse();
-			if(grp.hasCommentsResponse())
-				val = grp.getCommentsResponse();
-			if(grp.hasImageResponse())
-				val = grp.getImageResponse();
-		((Callback)callbacks.get(i)).onResult(grp.getContext(), val);
-			i++;
+		try {
+			Response resp = executeProtobuf(request.build());
+			int i = 0;
+			for(ResponseGroup grp : resp.getResponseGroupList()) {
+				Object val = null;
+				if(grp.hasAppsResponse())
+					val = grp.getAppsResponse();
+				if(grp.hasCategoriesResponse())
+					val = grp.getCategoriesResponse();
+				if(grp.hasCommentsResponse())
+					val = grp.getCommentsResponse();
+				if(grp.hasImageResponse())
+					val = grp.getImageResponse();
+			((Callback)callbacks.get(i)).onResult(grp.getContext(), val);
+				i++;
+			}
+		} finally {
+			request = Request.newBuilder();
+			callbacks.clear();
 		}
-		request = Request.newBuilder();
-		callbacks.clear();
 	}
 	
 	public ResponseGroup execute(RequestGroup requestGroup) {
