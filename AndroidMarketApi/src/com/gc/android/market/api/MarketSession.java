@@ -71,7 +71,7 @@ public class MarketSession {
 	public MarketSession() {
 		context.setUnknown1(0);
 		context.setVersion(1002012);
-		context.setAndroidId("0000000000000000");
+		context.setAndroidId("1234567891234567");
 		//context.setAndroidId( hexadecimal(0123132123123113213).toLowerCase());
 		setLocale(Locale.getDefault());
 		context.setDeviceAndSdkVersion("passion:8");
