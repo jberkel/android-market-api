@@ -74,7 +74,7 @@ public class MarketSession {
 		context.setAndroidId("0123456789123456");
 		//context.setAndroidId( hexadecimal(0123132123123113213).toLowerCase());
 		setLocale(Locale.getDefault());
-		context.setDeviceAndSdkVersion("passion:8");
+		context.setDeviceAndSdkVersion("crespo:8");
 		setOperatorTMobile();
 	}
 	
