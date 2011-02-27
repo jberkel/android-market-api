@@ -28,6 +28,7 @@ task :compile => :setup do
   end
 end
 
+desc "create AndroidMarketApi.jar"
 task :jar => :compile do
   ant.jar(:destfile => "AndroidMarketApi.jar", :basedir=>build_dir)
 end
